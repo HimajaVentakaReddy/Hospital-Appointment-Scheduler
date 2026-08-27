@@ -283,11 +283,3 @@ Java Learner | Software Development Enthusiast
 
 ⭐ **If you find this project useful, consider giving the repository a star!**
 
-```
-
-This version will look much stronger on GitHub because it has a clear **About**, feature breakdown, scheduling algorithm, workflow, tech-stack table, file responsibilities, example scenario, future scope, and clean symbols without making it look overloaded.
-
-After replacing the old README, press **`Ctrl + S`**.
-
-Then **stop there broo**. Don't run `git init` yet if you haven't already. Tell me **saved**, and I'll take you through the GitHub part one command at a time.
-```
