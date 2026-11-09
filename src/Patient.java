@@ -1,23 +1,16 @@
-public class Patient {
+public class Patient extends Person {
 
-    private int patientId;
-    private String name;
     private int age;
     private String phoneNumber;
 
     public Patient(int patientId, String name, int age, String phoneNumber) {
-        this.patientId = patientId;
-        this.name = name;
+        super(patientId, name);
         this.age = age;
         this.phoneNumber = phoneNumber;
     }
 
     public int getPatientId() {
-        return patientId;
-    }
-
-    public String getName() {
-        return name;
+        return getId();
     }
 
     public int getAge() {
@@ -29,10 +22,15 @@ public class Patient {
     }
 
     @Override
-    public String toString() {
-        return "Patient ID: " + patientId
-                + " | Name: " + name
+    public String getRole() {
+        return "Patient";
+    }
+
+    @Override
+    public void displayDetails() {
+        System.out.println("Patient ID: " + getId()
+                + " | Name: " + getName()
                 + " | Age: " + age
-                + " | Phone: " + phoneNumber;
+                + " | Phone: " + phoneNumber);
     }
 }
