@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 
 public class Main {
@@ -7,15 +8,10 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         AppointmentScheduler scheduler = new AppointmentScheduler();
 
-        int doctorIdCounter = 1;
-        int patientIdCounter = 1;
-        int appointmentIdCounter = 1;
+        int choice;
 
-        while (true) {
-
-            System.out.println("\n========================================");
-            System.out.println("     HOSPITAL APPOINTMENT SCHEDULER");
-            System.out.println("========================================");
+        do {
+            System.out.println("\n===== HOSPITAL APPOINTMENT SCHEDULER =====");
             System.out.println("1. Register Doctor");
             System.out.println("2. Register Patient");
             System.out.println("3. View Doctors");
@@ -23,156 +19,99 @@ public class Main {
             System.out.println("5. Book Appointment");
             System.out.println("6. View Appointments");
             System.out.println("7. Cancel Appointment");
-            System.out.println("8. Exit");
-            System.out.println("========================================");
+            System.out.println("8. View All People");
+            System.out.println("9. Exit");
             System.out.print("Enter your choice: ");
 
-            int choice;
-
-            try {
-                choice = Integer.parseInt(scanner.nextLine());
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a number.");
-                continue;
-            }
+            choice = scanner.nextInt();
+            scanner.nextLine();
 
             switch (choice) {
 
                 case 1:
-                    System.out.println("\n--- Register Doctor ---");
+                    System.out.print("Enter Doctor ID: ");
+                    int doctorId = scanner.nextInt();
+                    scanner.nextLine();
 
-                    System.out.print("Enter doctor name: ");
+                    System.out.print("Enter Doctor Name: ");
                     String doctorName = scanner.nextLine();
 
-                    System.out.print("Enter specialization: ");
+                    System.out.print("Enter Specialization: ");
                     String specialization = scanner.nextLine();
 
-                    Doctor doctor =
-                            new Doctor(doctorIdCounter, doctorName, specialization);
-
-                    scheduler.addDoctor(doctor);
-
-                    System.out.println("Doctor ID: " + doctorIdCounter);
-
-                    doctorIdCounter++;
+                    scheduler.registerDoctor(
+                            new Doctor(doctorId, doctorName, specialization));
                     break;
 
                 case 2:
-                    System.out.println("\n--- Register Patient ---");
+                    System.out.print("Enter Patient ID: ");
+                    int patientId = scanner.nextInt();
+                    scanner.nextLine();
 
-                    System.out.print("Enter patient name: ");
+                    System.out.print("Enter Patient Name: ");
                     String patientName = scanner.nextLine();
 
-                    System.out.print("Enter patient age: ");
+                    System.out.print("Enter Age: ");
+                    int age = scanner.nextInt();
+                    scanner.nextLine();
 
-                    int age;
+                    System.out.print("Enter Phone Number: ");
+                    String phone = scanner.nextLine();
 
-                    try {
-                        age = Integer.parseInt(scanner.nextLine());
-
-                        if (age <= 0) {
-                            System.out.println("Age must be greater than 0.");
-                            break;
-                        }
-
-                    } catch (NumberFormatException e) {
-                        System.out.println("Invalid age.");
-                        break;
-                    }
-
-                    System.out.print("Enter phone number: ");
-                    String phoneNumber = scanner.nextLine();
-
-                    Patient patient =
-                            new Patient(patientIdCounter, patientName, age, phoneNumber);
-
-                    scheduler.addPatient(patient);
-
-                    System.out.println("Patient ID: " + patientIdCounter);
-
-                    patientIdCounter++;
+                    scheduler.registerPatient(
+                            new Patient(patientId, patientName, age, phone));
                     break;
 
                 case 3:
-                    System.out.println("\n--- Doctors ---");
                     scheduler.viewDoctors();
                     break;
 
                 case 4:
-                    System.out.println("\n--- Patients ---");
                     scheduler.viewPatients();
                     break;
 
                 case 5:
-                    System.out.println("\n--- Book Appointment ---");
-
                     System.out.print("Enter Patient ID: ");
-                    int patientId;
-
-                    try {
-                        patientId = Integer.parseInt(scanner.nextLine());
-                    } catch (NumberFormatException e) {
-                        System.out.println("Invalid Patient ID.");
-                        break;
-                    }
+                    int pId = scanner.nextInt();
 
                     System.out.print("Enter Doctor ID: ");
-                    int doctorId;
+                    int dId = scanner.nextInt();
+                    scanner.nextLine();
 
-                    try {
-                        doctorId = Integer.parseInt(scanner.nextLine());
-                    } catch (NumberFormatException e) {
-                        System.out.println("Invalid Doctor ID.");
-                        break;
-                    }
-
-                    System.out.print("Enter appointment date (DD-MM-YYYY): ");
+                    System.out.print("Enter Date (DD-MM-YYYY): ");
                     String date = scanner.nextLine();
 
-                    System.out.print("Enter appointment time (HH:MM): ");
+                    System.out.print("Enter Time: ");
                     String time = scanner.nextLine();
 
-                    scheduler.bookAppointment(
-                            appointmentIdCounter,
-                            patientId,
-                            doctorId,
-                            date,
-                            time
-                    );
-
-                    appointmentIdCounter++;
+                    scheduler.bookAppointment(pId, dId, date, time);
                     break;
 
                 case 6:
-                    System.out.println("\n--- Appointments ---");
                     scheduler.viewAppointments();
                     break;
 
                 case 7:
-                    System.out.println("\n--- Cancel Appointment ---");
-
-                    System.out.print("Enter Appointment ID: ");
-
-                    int appointmentId;
-
-                    try {
-                        appointmentId = Integer.parseInt(scanner.nextLine());
-                    } catch (NumberFormatException e) {
-                        System.out.println("Invalid Appointment ID.");
-                        break;
-                    }
+                    System.out.print("Enter Appointment ID to cancel: ");
+                    int appointmentId = scanner.nextInt();
 
                     scheduler.cancelAppointment(appointmentId);
                     break;
 
                 case 8:
-                    System.out.println("\nThank you for using Hospital Appointment Scheduler!");
-                    scanner.close();
-                    return;
+                    scheduler.viewAllPeople();
+                    break;
+
+                case 9:
+                    System.out.println("Thank you for using Hospital Appointment Scheduler!");
+                    break;
 
                 default:
-                    System.out.println("Invalid choice. Please select 1-8.");
+                    System.out.println("Invalid choice! Please try again.");
             }
-        }
+
+        } while (choice != 9);
+
+        scanner.close();
     }
 }
