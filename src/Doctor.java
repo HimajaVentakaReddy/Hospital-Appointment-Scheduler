@@ -1,23 +1,16 @@
-public class Doctor {
+public class Doctor extends Person {
 
-    private int doctorId;
-    private String name;
     private String specialization;
     private boolean available;
 
     public Doctor(int doctorId, String name, String specialization) {
-        this.doctorId = doctorId;
-        this.name = name;
+        super(doctorId, name);
         this.specialization = specialization;
         this.available = true;
     }
 
     public int getDoctorId() {
-        return doctorId;
-    }
-
-    public String getName() {
-        return name;
+        return getId();
     }
 
     public String getSpecialization() {
@@ -33,10 +26,15 @@ public class Doctor {
     }
 
     @Override
-    public String toString() {
-        return "Doctor ID: " + doctorId
-                + " | Name: Dr. " + name
+    public String getRole() {
+        return "Doctor";
+    }
+
+    @Override
+    public void displayDetails() {
+        System.out.println("Doctor ID: " + getId()
+                + " | Name: Dr. " + getName()
                 + " | Specialization: " + specialization
-                + " | Available: " + (available ? "Yes" : "No");
+                + " | Available: " + (available ? "Yes" : "No"));
     }
 }
